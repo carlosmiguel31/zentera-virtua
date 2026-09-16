@@ -1,0 +1,7 @@
+# Zentera Virtua — robots.txt
+# Antes da publicação, atualize a linha "Sitemap" abaixo com o domínio final
+# (o mesmo valor configurado em VITE_SITE_URL) e remova este comentário.
+# Exemplo: Sitemap: https://www.seudominio.com.br/sitemap.xml
+
+User-agent: *
+Allow: /

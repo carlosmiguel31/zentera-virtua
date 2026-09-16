@@ -1,0 +1,300 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-text-muted: var(--text-muted);
+  --color-text-subtle: var(--text-subtle);
+  --color-brand-violet: var(--brand-violet);
+  --color-brand-indigo: var(--brand-indigo);
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-teal: var(--brand-teal);
+  --color-brand-cyan: var(--brand-cyan);
+  --font-display: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.875rem;
+
+  /* Brand palette — constante nos dois temas (identidade oficial) */
+  --brand-violet: #363271;
+  --brand-indigo: #30457a;
+  --brand-blue: #377296;
+  --brand-teal: #469cb5;
+  --brand-cyan: #4fb2c6;
+  --brand-deep: #1d2053;
+
+  /* Gradiente oficial — nunca alterado entre temas */
+  --gradient-brand: linear-gradient(
+    110deg,
+    #363271 0%,
+    #30457a 25%,
+    #377296 55%,
+    #469cb5 78%,
+    #4fb2c6 100%
+  );
+}
+
+/* ==========================================================================
+   Tema escuro (padrão). Aplica-se a :root e à classe .dark.
+   ========================================================================== */
+:root,
+.dark {
+  --background: #050609;
+  --foreground: #f5f7fa;
+  --surface: #0a0d12;
+  --card: #0e131a;
+  --card-foreground: #f5f7fa;
+  --surface-elevated: #141b24;
+  --popover: #0e131a;
+  --popover-foreground: #f5f7fa;
+
+  --primary: #4fb2c6;
+  --primary-foreground: #050609;
+  --secondary: #141b24;
+  --secondary-foreground: #f5f7fa;
+  --muted: #0e131a;
+  --muted-foreground: #a9b2be;
+  --accent: #30457a;
+  --accent-foreground: #f5f7fa;
+  --destructive: oklch(0.62 0.21 25);
+  --destructive-foreground: #f5f7fa;
+
+  --text-muted: #a9b2be;
+  --text-subtle: #727d8a;
+
+  --border: rgba(79, 178, 198, 0.12);
+  --input: rgba(255, 255, 255, 0.1);
+  --ring: rgba(79, 178, 198, 0.4);
+
+  --surface-card-background: linear-gradient(
+    180deg,
+    rgba(20, 27, 36, 0.78),
+    rgba(14, 19, 26, 0.62)
+  );
+  --surface-card-border: rgba(79, 178, 198, 0.1);
+  --surface-card-shadow: none;
+  --ambient-opacity: 0.35;
+
+  --shadow-glow: 0 0 40px rgba(79, 178, 198, 0.14), 0 0 90px rgba(54, 50, 113, 0.12);
+  --shadow-glow-strong: 0 0 60px rgba(79, 178, 198, 0.24), 0 0 140px rgba(54, 50, 113, 0.2);
+}
+
+/* ==========================================================================
+   Tema claro — fiel à identidade da Zentera Virtua (azul/índigo/ciano).
+   ========================================================================== */
+.light {
+  --background: #f4f7fa;
+  --foreground: #111827;
+  --surface: #edf2f7;
+  --card: #ffffff;
+  --card-foreground: #111827;
+  --surface-elevated: #e7edf4;
+  --popover: #ffffff;
+  --popover-foreground: #172033;
+
+  --primary: #377296;
+  --primary-foreground: #ffffff;
+  --secondary: #e7edf4;
+  --secondary-foreground: #1d2053;
+  --muted: #eaf0f6;
+  --muted-foreground: #526071;
+  --accent: #dceff4;
+  --accent-foreground: #1d2053;
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: #ffffff;
+
+  --text-muted: #526071;
+  --text-subtle: #6b7788;
+
+  --border: rgba(48, 69, 122, 0.16);
+  --input: rgba(48, 69, 122, 0.16);
+  --ring: rgba(79, 178, 198, 0.42);
+
+  --surface-card-background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.96),
+    rgba(244, 247, 250, 0.92)
+  );
+  --surface-card-border: rgba(48, 69, 122, 0.14);
+  --surface-card-shadow: 0 18px 55px rgba(29, 32, 83, 0.08), 0 3px 12px rgba(48, 69, 122, 0.05);
+  --ambient-opacity: 0.14;
+
+  --shadow-glow: 0 0 40px rgba(79, 178, 198, 0.12), 0 0 85px rgba(54, 50, 113, 0.08);
+  --shadow-glow-strong: 0 0 55px rgba(79, 178, 198, 0.18), 0 0 120px rgba(54, 50, 113, 0.12);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--color-background);
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+  ::selection {
+    background: rgba(79, 178, 198, 0.3);
+    color: var(--foreground);
+  }
+}
+
+/* Transição suave entre temas — apenas propriedades de cor/sombra, para não
+   interferir nas animações de layout/transform do Framer Motion. */
+@layer base {
+  html.theme-ready body,
+  html.theme-ready body *:not(svg):not(path) {
+    transition:
+      background-color 220ms ease,
+      color 220ms ease,
+      border-color 220ms ease,
+      box-shadow 220ms ease;
+  }
+}
+
+@utility text-gradient-brand {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-gradient-brand {
+  background: var(--gradient-brand);
+}
+
+@utility surface-card {
+  background: var(--surface-card-background);
+  border: 1px solid var(--surface-card-border);
+  box-shadow: var(--surface-card-shadow, none);
+  backdrop-filter: blur(10px);
+}
+
+@utility glow-brand {
+  box-shadow: var(--shadow-glow);
+}
+
+@utility ambient-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  opacity: var(--ambient-opacity, 0.35);
+  pointer-events: none;
+}
+
+/* Âncoras da home: impede que o Header fixo cubra os títulos das seções. */
+@layer base {
+  :target,
+  section[id],
+  [id="conteudo"],
+  [id="top"] {
+    scroll-margin-top: 5.5rem;
+  }
+  @media (min-width: 768px) {
+    :target,
+    section[id],
+    [id="conteudo"],
+    [id="top"] {
+      scroll-margin-top: 6.5rem;
+    }
+  }
+}
+
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--brand-cyan);
+    outline-offset: 2px;
+  }
+}
+
+/* Conteúdo das páginas legais (Política de Privacidade e Termos de Uso) */
+.legal-content h2 {
+  margin-top: 2.5rem;
+  font-size: 1.375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--foreground);
+}
+.legal-content p {
+  margin-top: 1rem;
+  line-height: 1.75;
+  color: var(--text-muted);
+}
+.legal-content ul {
+  margin-top: 1rem;
+  padding-left: 1.25rem;
+  list-style: disc;
+  color: var(--text-muted);
+}
+.legal-content li {
+  margin-top: 0.5rem;
+  line-height: 1.7;
+}
+.legal-content a {
+  color: var(--brand-cyan);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.legal-content a:hover {
+  color: var(--foreground);
+}
+.legal-content .legal-note {
+  margin-top: 3rem;
+  border: 1px dashed rgba(79, 178, 198, 0.25);
+  border-radius: 1rem;
+  padding: 1rem 1.25rem;
+  font-size: 0.875rem;
+  color: var(--text-subtle);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+  html.theme-ready body,
+  html.theme-ready body *:not(svg):not(path) {
+    transition: none !important;
+  }
+}

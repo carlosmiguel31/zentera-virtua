@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Zentera Virtua — sitemap.xml
+  IMPORTANTE: sitemaps exigem URLs absolutas. Antes da publicação, substitua
+  o marcador {{SITE_URL}} pelo domínio final do site (o mesmo valor de
+  VITE_SITE_URL, sem barra ao final) e remova este comentário.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>{{SITE_URL}}/</loc>
+  </url>
+  <url>
+    <loc>{{SITE_URL}}/politica-de-privacidade</loc>
+  </url>
+  <url>
+    <loc>{{SITE_URL}}/termos-de-uso</loc>
+  </url>
+</urlset>
