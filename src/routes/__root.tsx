@@ -142,8 +142,27 @@ function RootShell({ children }: { children: ReactNode }) {
       <head>
         {/* Aplica o tema salvo antes da pintura para evitar flash incorreto (SSR). */}
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+
         <HeadContent />
+
+        {/* Google Analytics */}
+        <script
+          async={true}
+          src="https://www.googletagmanager.com/gtag/js?id=G-RD4CX7RMHQ"
+        ></script>
+
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-RD4CX7RMHQ');
+            `,
+          }}
+        />
       </head>
+
       <body>
         {children}
         <Scripts />
