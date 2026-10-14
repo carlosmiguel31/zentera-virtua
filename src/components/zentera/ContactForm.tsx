@@ -37,11 +37,6 @@ type Status = "idle" | "loading" | "success" | "error";
 
 const REQUEST_TIMEOUT_MS = 15000;
 
-function getWebhookUrl(): string | undefined {
-  const url = (import.meta.env.VITE_CONTACT_WEBHOOK_URL as string | undefined)?.trim();
-  return url ? url : undefined;
-}
-
 export function ContactForm() {
   const reduce = useReducedMotion();
   const [values, setValues] = useState<FormValues>(initialValues);
@@ -86,18 +81,6 @@ export function ContactForm() {
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length > 0) return;
 
-    const webhookUrl = getWebhookUrl();
-    if (!webhookUrl) {
-      setStatus("error");
-      setErrorMessage(
-        import.meta.env.DEV
-          ? "A variável VITE_CONTACT_WEBHOOK_URL não está configurada. Defina a URL do webhook no arquivo .env para habilitar o envio."
-          : "O envio está temporariamente indisponível. Tente novamente mais tarde ou fale conosco por outro canal.",
-      );
-      focusStatus();
-      return;
-    }
-
     submittingRef.current = true;
     setStatus("loading");
     setErrorMessage("");
@@ -109,15 +92,14 @@ export function ContactForm() {
       phone: values.phone.trim(),
       mainChannel: values.mainChannel,
       privacyAccepted: values.privacyAccepted,
-      source: "zentera-virtua-landing-page",
-      submittedAt: new Date().toISOString(),
+      website: values.website,
     };
 
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
     try {
-      const response = await fetch(webhookUrl, {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -125,6 +107,16 @@ export function ContactForm() {
       });
 
       if (!response.ok) {
+        const errorPayload = (await response.json().catch(() => null)) as { error?: string } | null;
+
+        if (response.status === 429 || errorPayload?.error === "rate_limited") {
+          setStatus("error");
+          setErrorMessage(
+            "Muitas tentativas foram feitas em pouco tempo. Aguarde alguns minutos e tente novamente.",
+          );
+          return;
+        }
+
         throw new Error(`Resposta HTTP inválida: ${response.status}`);
       }
 
